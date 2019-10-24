@@ -3,11 +3,11 @@ project(fillit C)
 
 set(CMAKE_C_STANDARD 99)
 
-include_directories(libft)
+include_directories(libft/includes)
 
-set(SOURCES  main.c)
+set(SOURCES srcs/main.c srcs/parsing.c)
 
-set (HEADER get_next_line.h)
+set(HEADERS includes/fillit.h)
 
 add_executable(fillit ${SOURCES} ${HEADERS})
 
