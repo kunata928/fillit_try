@@ -12,9 +12,14 @@
 
 #include "../includes/fillit.h"
 
-static int		has_neighbour(int i, char *buff)
+static int		has_neighbour(int i, char *buff)//this function check/ if # has near other #
 {
-	if (buff[i - 1] == '#' || buff[i + 1] == '#')
+	if (i != 0)
+	{
+		if (buff[i - 1] == '#')
+			return (1);
+	}
+	if (buff[i + 1] == '#')
 		return (1);
 	if (i > 4)
 	{
@@ -29,33 +34,49 @@ static int		has_neighbour(int i, char *buff)
 	return (0);
 }
 
+static char		*clean_memory()
+{
+	return (0);
+}
+
+static void		forchest(t_data *data, char *buff, char **piece)
+{
+	if (!has_neighbour(data->i, buff))
+		clean_memory();
+	if (!(data->count))
+	{
+		piece[0] = 0;
+		piece[1] = 0;
+		data->fst = data->i;
+	}
+	else
+	{
+		piece[2*(data->count)] = (data->i + 1) % 5 - (data->fst + 1) % 5;
+		piece[2*(data->count) + 1] = data->i / 5  - data->fst / 5;
+	}
+}
+
 static char		*tetrimina(char *buff, char **piece)
 {
-	int		count;
-	int		i;
-	int		first;
+	t_data *data;
 
-	i = 0;
-	first = 0;
-	while (i < 20 && count < 4)
+	data->count = 0;
+	while (data->i < 20 && data->count < 4)
 	{
-		if (((i + 1) % 5) == 0 && buff[i] != '\n')
+		if (((data->i + 1) % 5) == 0 && buff[data->i] != '\n')
 			return (0);
-		else if (buff[i] == '#')
+		if (buff[data->i] == '#')
 		{
-			if (!first)
-				first = 1;
-			else
-				return(has_neighbour(i, buff));
-			count++;
+			forchest(data, buff, piece);
+			data->count += 1;
 		}
-		else if (buff[i] != '.')
+		else if (buff[data->i] != '.')
 			return (0);
-		i++;
+		data->i++;
 	}
-	if (i != 4 || buff[21] != '\n')
-		return (0);
-	return ();
+	if (data->i != 4 || buff[21] != '\n')
+		return (clean_memory());
+	return (0);
 }
 
 t_tetris		*parsing(int fd)
@@ -63,14 +84,21 @@ t_tetris		*parsing(int fd)
 	t_tetris	*tetris;
 	int			len;
 	char 		*buff;
+	char		*piece;
 
 	if (fd < 0 || read(fd, NULL, 0) < 0)
 		return (-1);
-	if ((len = read(fd, buff, BUFF)) == 21)
+	if ((len = read(fd, buff, BUFF)) == 21) //read 21 symbols
 	{
+		//if there are right tetrimina malloc memory for it and add link for it array
+		//else clean memory
+		if (!(piece = (char *)malloc(sizeof(char) * 9)))
+			return (0);
+		piece[8] = '\0';
+		tetrimina(buff, &piece);
 		if(!(tetris = (t_tetris *)ft_memalloc(sizeof(t_tetris))))
 			return (NULL);
-		tetrimina(buff, &(tetris->piece));
+
 	}
 	return (NULL);
 	return(tetris);

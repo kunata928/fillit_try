@@ -18,15 +18,23 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <gssapi.h>
 # include "libft.h"
 # define BUFF 21
 
 typedef struct	s_tetris
 {
-	char			piece[8];
+	char			*piece;
 	char			letter;
 	struct s_tetris	*next;
 }				t_tetris;
+
+typedef struct	s_data
+{
+	int count;
+	int i;
+	int fst;
+}				t_data;
 
 static t_tetris	*parsing(int fd);
 
