@@ -10,21 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_FILLIT_H
-# define FILLIT_FILLIT_H
+#ifndef FILLIT_H
+# define FILLIT_H
+# define BUFF 21
 
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
-# include <gssapi.h>
 # include "libft.h"
-# define BUFF 21
 
 typedef struct	s_tetris
 {
-	char			*piece;
+	int				*piece;
 	char			letter;
 	struct s_tetris	*next;
 }				t_tetris;
@@ -36,6 +35,7 @@ typedef struct	s_data
 	int fst;
 }				t_data;
 
-static t_tetris	*parsing(int fd);
+t_tetris	*parsing(int fd);
+void	error();
 
-#endif FILLIT_FILLIT_H
+# endif

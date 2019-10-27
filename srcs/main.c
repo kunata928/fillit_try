@@ -21,6 +21,8 @@ int		main(int ac, char **av)
 	{
 		fd = open(av[1], O_RDONLY);
 	}
+	fd = open("/Users/pmelodi/Projects/fillit/tetris",O_RDONLY);
 	tetris = parsing(fd);
-	return 0;
+	printf("%d[]", tetris->piece);
+	return (0);
 }
