@@ -23,6 +23,6 @@ int		main(int ac, char **av)
 	}
 	fd = open("/Users/pmelodi/Projects/fillit/tetris",O_RDONLY);
 	tetris = parsing(fd);
-	printf("%d[]", tetris->piece);
+	printf("", tetris->piece);
 	return (0);
 }
