@@ -34,11 +34,6 @@ static int		has_neighbour(int i, char *buff)//this function check/ if # has near
 	return (0);
 }
 
-static void		clean_memory()
-{
-	return ;
-}
-
 static void		forchest(t_data *data, char *buff, int *piece)
 {
 	if (!has_neighbour(data->i, buff))
@@ -62,7 +57,70 @@ void		error()
 	exit(1);
 }
 
-static void		tetrimina(char *buff, int *piece, t_tetris **tetris)
+static void		tetrimina(char *buff, t_tetris *tetris, int num)
+{
+	t_data *data;
+
+	data = (t_data *)ft_memalloc(sizeof(t_data));
+	while (data->i < 20 && data->count < 5)
+	{
+		if (((data->i + 1) % 5) == 0)
+		{
+			if (buff[data->i] != '\n')
+				error();
+			else
+			{
+				data->i += 1;
+				continue;
+			}
+		}
+		if (buff[data->i] == '#')
+		{
+			forchest(data, buff, tetris->piece);
+			data->count += 1;
+		}
+		else if (buff[data->i] != '.')
+			error();
+		data->i++;
+	}
+	if (data->i != 20 || data->count != 4 || buff[20] != '\n')
+		error();
+	free(data);
+	data = NULL;
+	return ;
+}
+
+t_tetris		**parsing(int fd)
+{
+	t_tetris	**tetris;
+	char		buff[BUFF];
+	int			*piece;
+	int			nums;
+	int			len;
+
+	len = read(fd, buff, BUFF);
+	if ((len - 20) % 21 != 0)
+		error();
+	else
+	{
+		buff[len] = '\n';
+		nums = (len - 20) / 21 + 1;
+		tetris = (t_tetris **)ft_memalloc(sizeof(t_tetris *) * (nums));
+		len = 0;
+		while (len < nums)
+		{
+			tetris[len] = (t_tetris *)ft_memalloc(sizeof(t_tetris));
+			tetris[len]->piece = (int *)ft_memalloc(sizeof(int) * 8);
+			(tetris[len])->letter = 'A' + len;
+			tetrimina(buff + len * 21, tetris[len], len);
+			len++;
+		}
+	}
+	return (tetris);
+}
+
+/*
+ * static void		tetrimina(char *buff, int *piece, t_tetris **tetris)
 {
 	t_data *data;
 
@@ -92,7 +150,9 @@ static void		tetrimina(char *buff, int *piece, t_tetris **tetris)
 		error();
 	return ;
 }
+*/
 
+/*
 static t_tetris	*new_elem(int *piece, int nums)
 {
 	t_tetris	*list;
@@ -104,7 +164,9 @@ static t_tetris	*new_elem(int *piece, int nums)
 	list->next = NULL;
 	return (list);
 }
+ */
 
+/*
 static void	add_in_tale(t_tetris *tetris, t_tetris *new)
 {
 	t_tetris *begin;
@@ -119,9 +181,9 @@ static void	add_in_tale(t_tetris *tetris, t_tetris *new)
 		begin = begin->next;
 	begin->next = new;
 	return ;
-}
+}*/
 
-t_tetris		*parsing(int fd)
+/*t_tetris		*parsing(int fd)
 {
 	t_tetris	*tetris;
 	t_tetris	*tmp;
@@ -146,4 +208,4 @@ t_tetris		*parsing(int fd)
 		nums++;
 	}
 	return(tetris);
-}
+}*/

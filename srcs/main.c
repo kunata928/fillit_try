@@ -15,14 +15,15 @@
 int		main(int ac, char **av)
 {
 	int			fd;
-	t_tetris	*tetris;
+	t_tetris	**tetris;
 
 	if (ac == 2)
 	{
 		fd = open(av[1], O_RDONLY);
 	}
-	fd = open("/Users/pmelodi/Projects/fillit/tetris",O_RDONLY);
+	fd = open("/Users/pmelodi/Projects/fillit/tetris", O_RDONLY);
 	tetris = parsing(fd);
-	printf("", tetris->piece);
+	ft_putstr("parsing done");
+	//printf("", tetris->piece);
 	return (0);
 }

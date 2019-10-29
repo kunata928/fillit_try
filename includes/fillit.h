@@ -12,7 +12,7 @@
 
 #ifndef FILLIT_H
 # define FILLIT_H
-# define BUFF 21
+# define BUFF 600
 
 # include <string.h>
 # include <unistd.h>
@@ -25,7 +25,6 @@ typedef struct	s_tetris
 {
 	int				*piece;
 	char			letter;
-	struct s_tetris	*next;
 }				t_tetris;
 
 typedef struct	s_data
@@ -35,7 +34,7 @@ typedef struct	s_data
 	int fst;
 }				t_data;
 
-t_tetris	*parsing(int fd);
+t_tetris	**parsing(int fd);
 void	error();
 
 # endif
