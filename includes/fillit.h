@@ -34,7 +34,13 @@ typedef struct	s_data
 	int fst;
 }				t_data;
 
-t_tetris	**parsing(int fd);
+typedef struct	s_xy
+{
+	int		x;
+	int		y;
+}				t_xy;
+t_tetris	**parsing(int fd, int *nums);
+void	print_tetris(t_tetris **tetris, int nums);
 void	error();
 
 # endif

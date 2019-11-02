@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelodi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,21 +12,22 @@
 
 #include "../includes/fillit.h"
 
-int		main(int ac, char **av)
+void	print_tetris(t_tetris **tetris, int nums)
 {
-	int			fd;
-	int			nums;
-	t_tetris	**tetris;
+	int i;
+	int j;
 
-	if (ac == 2)
+	i = 0;
+	while (i < nums)
 	{
-		fd = open(av[1], O_RDONLY);
+		j = 0;
+		while (j < 8)
+		{
+			ft_putnbr(tetris[i]->piece[j]);
+			j++;
+		}
+		ft_putchar('\n');
+		i++;
 	}
-	fd = open("/Users/pmelodi/Projects/fillit/tetris", O_RDONLY);
-	//tetris = parsing(fd, &nums);
-	//print_tetris(tetris, nums);
-	ft_putstr("parsing done");
-
-	close(fd);
-	return (0);
+	return ;
 }

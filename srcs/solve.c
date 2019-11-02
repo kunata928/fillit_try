@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelodi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,21 +12,45 @@
 
 #include "../includes/fillit.h"
 
-int		main(int ac, char **av)
+static int	ft_sqrt(int num)
 {
-	int			fd;
-	int			nums;
-	t_tetris	**tetris;
+	int rt;
+	int nums;
 
-	if (ac == 2)
+	nums = num * 4;
+	rt = 2;
+	while (rt * rt < num)
+		rt++;
+	return (rt);
+}
+
+static int	try_to_fill(t_tetris *tetris, char **arr)
+{
+	int		i;
+	t_xy	*xy;
+
+	i = 0;
+
+	while (i < 8)
 	{
-		fd = open(av[1], O_RDONLY);
+		arr[xy->x + tetris->piece[2 * i]][xy->y + tetris->piece[2 * i + 1]] = '#';
+		i++;
 	}
-	fd = open("/Users/pmelodi/Projects/fillit/tetris", O_RDONLY);
-	//tetris = parsing(fd, &nums);
-	//print_tetris(tetris, nums);
-	ft_putstr("parsing done");
+	while
+}
 
-	close(fd);
-	return (0);
+static int	fill(t_tetris **tetris, int nums)
+{
+	char	*arr;
+
+	arr = (char *)ft_memalloc(sizeof(char) * (ft_sqrt(nums)));
+
+}
+
+char		*solver(t_tetris **tetris)
+{
+	char	*res;
+
+
+	return (res);
 }

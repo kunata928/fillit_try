@@ -90,12 +90,11 @@ static void		tetrimina(char *buff, t_tetris *tetris, int num)
 	return ;
 }
 
-t_tetris		**parsing(int fd)
+t_tetris		**parsing(int fd, int *nums)
 {
 	t_tetris	**tetris;
 	char		buff[BUFF];
 	int			*piece;
-	int			nums;
 	int			len;
 
 	len = read(fd, buff, BUFF);
@@ -104,10 +103,10 @@ t_tetris		**parsing(int fd)
 	else
 	{
 		buff[len] = '\n';
-		nums = (len - 20) / 21 + 1;
-		tetris = (t_tetris **)ft_memalloc(sizeof(t_tetris *) * (nums));
+		*nums = (len - 20) / 21 + 1;
+		tetris = (t_tetris **)ft_memalloc(sizeof(t_tetris *) * (*nums));
 		len = 0;
-		while (len < nums)
+		while (len < *nums)
 		{
 			tetris[len] = (t_tetris *)ft_memalloc(sizeof(t_tetris));
 			tetris[len]->piece = (int *)ft_memalloc(sizeof(int) * 8);

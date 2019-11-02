@@ -5,7 +5,7 @@ set(CMAKE_C_STANDARD 99)
 
 include_directories(libft/includes)
 
-set(SOURCES srcs/main.c srcs/parsing.c)
+set(SOURCES srcs/main.c srcs/parsing.c srcs/print.c srcs/solve.c)
 
 set(HEADERS includes/fillit.h)
 
