@@ -23,8 +23,8 @@ int		main(int ac, char **av)
 		fd = open(av[1], O_RDONLY);
 	}
 	fd = open("/Users/pmelodi/Projects/fillit/tetris", O_RDONLY);
-	//tetris = parsing(fd, &nums);
-	//print_tetris(tetris, nums);
+	tetris = parsing(fd, &nums);
+	print_tetris(tetris, nums);
 	ft_putstr("parsing done");
 
 	close(fd);

@@ -66,6 +66,7 @@ static int	fill(t_tetris **tetris, int nums)
 		try_to_fill(tetris[i], arr, xy0);
 		i++;
 	}
+	return (0);
 }
 
 char		*solver(t_tetris **tetris)
