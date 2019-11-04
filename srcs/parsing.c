@@ -49,6 +49,7 @@ static void		forchest(t_data *data, char *buff, int *piece)
 		(piece[(2*(data->count))]) = (data->i) / 5  - (data->fst) / 5 ;
 		(piece[2*(data->count) + 1]) = (data->i + 1) % 5 - (data->fst + 1) % 5;
 	}
+	data->count += 1;
 }
 
 void		error()
@@ -75,10 +76,7 @@ static void		tetrimina(char *buff, t_tetris *tetris, int num)
 			}
 		}
 		if (buff[data->i] == '#')
-		{
 			forchest(data, buff, tetris->piece);
-			data->count += 1;
-		}
 		else if (buff[data->i] != '.')
 			error();
 		data->i++;
